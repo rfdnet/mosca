@@ -1,7 +1,9 @@
 // Load the AWS SDK for Node.js
 const AWS = require("aws-sdk");
 // Create DynamoDB document client
-let dynamodb = new AWS.DynamoDB.DocumentClient({ apiVersion: "2012-08-10" });
+let dynamodb = new AWS.DynamoDB.DocumentClient();
+
+
 
 
 // Define handler function, the entry point to our code for the Lambda service
@@ -13,7 +15,7 @@ exports.handler = function(event, context, callback){
     let params = {
         TableName:'HelloWorldDatabase',
         Key: {
-           "ID":  "2"
+           "ID":  "1"
         }
     };
     // Using await, make sure object writes to DynamoDB table before continuing execution
