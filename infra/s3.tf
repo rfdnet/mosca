@@ -1,7 +1,7 @@
 
-##### Creating an S3 Bucket #####
+##### static contentt #####
 resource "aws_s3_bucket" "bucket" {
-  bucket = "mosca-static-content"
+  bucket        = "mosca-static-content"
   force_destroy = true
 }
 
@@ -16,10 +16,16 @@ resource "aws_s3_bucket_website_configuration" "webapp" {
 }
 
 resource "aws_s3_object" "object" {
-  bucket = aws_s3_bucket.bucket.id
-  key    = "index.html"
-  source = "../app/index.html"
+  bucket       = aws_s3_bucket.bucket.id
+  key          = "index.html"
+  source       = "../app/index.html"
   content_type = "text/html"
 
-  
+
+}
+
+# remote state
+resource "aws_s3_bucket" "mosca-tf-state" {
+  bucket = "mosca-tf-state"
+
 }
