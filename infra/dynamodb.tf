@@ -4,13 +4,17 @@ resource "aws_dynamodb_table" "HelloWorldDatabase" {
   read_capacity  = 1
   write_capacity = 1
   hash_key       = "ID"
-  range_key      = null
+  range_key      = "Surname"
 
   attribute {
     name = "ID"
     type = "S"
   }
 
+  attribute {
+    name = "Surname"
+    type = "S"
+  }
 
   ttl {
     attribute_name = ""

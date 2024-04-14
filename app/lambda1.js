@@ -1,3 +1,5 @@
+// INSERT on DB!!!
+
 // Include the AWS SDK module
 const AWS = require('aws-sdk');
 // Instantiate a DynamoDB document client with the SDK
@@ -10,13 +12,17 @@ let now = date.toISOString();
 // We receive the object that triggers the function as a parameter
 exports.handler = async (event) => {
     // Extract values from event and format as strings
-    let name = JSON.stringify(`Hello from Lambda, ${event.firstName} ${event.lastName}`);
+    //let name = JSON.stringify(`Hello from Lambda, ${event.firstName} dado inserido!`);
+    let name = `${event.firstName}` ;
+    let surname = `${event.lastName}` ;
+    let msg = JSON.stringify(`Hello from Lambda, ${event.firstName} dado inserido!`);
     // Create JSON object with parameters for DynamoDB and store in a variable
     let params = {
         TableName:'HelloWorldDatabase',
         Item: {
             'ID': name,
-            'LatestGreetingTime': now
+            'Surname': surname
+            
         }
     };
     // Using await, make sure object writes to DynamoDB table before continuing execution
@@ -24,7 +30,7 @@ exports.handler = async (event) => {
     // Create a JSON object with our response and store it in a constant
     const response = {
         statusCode: 200,
-        body: name
+        body: msg
     };
     // Return the response constant
     return response;
