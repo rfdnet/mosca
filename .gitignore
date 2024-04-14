@@ -28,3 +28,6 @@ TestResults.xml
 *.terraform*
 terraform.tfstate
 terraform.tfstate.backup
+
+#zip files
+*.zip

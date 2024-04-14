@@ -6,8 +6,6 @@ data "archive_file" "lambda" {
 }
 
 
-
-
 // Insert Lambda
 resource "aws_lambda_function" "HelloWorldFunction" {
   # If the file is not in the current working directory you will need to include a
@@ -20,6 +18,11 @@ resource "aws_lambda_function" "HelloWorldFunction" {
   source_code_hash = "g5wmtk3jCMfUcrXvhucwGkuHMWzk7htwWX2CJQMmMZw="
 
   runtime = "nodejs16.x"
+
+  tags = {
+    Env = "DEV"
+    Managedby = "Terraform"
+  }
 
   
 }
