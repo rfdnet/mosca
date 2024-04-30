@@ -1,5 +1,5 @@
 // INSERT on DB!!!
-
+// novo deploy!
 // Include the AWS SDK module
 const AWS = require('aws-sdk');
 // Instantiate a DynamoDB document client with the SDK
@@ -15,7 +15,7 @@ exports.handler = async (event) => {
     //let name = JSON.stringify(`Hello from Lambda, ${event.firstName} dado inserido!`);
     let name = `${event.firstName}` ;
     let surname = `${event.lastName}` ;
-    let msg = JSON.stringify(`Hello from Lambda, ${event.firstName} dado inserido!`);
+    let msg = JSON.stringify(`Hey, Hello from Lambda, ${event.firstName} dado inserido!`);
     // Create JSON object with parameters for DynamoDB and store in a variable
     let params = {
         TableName:'HelloWorldDatabase',
