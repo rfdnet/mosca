@@ -31,3 +31,5 @@ terraform.tfstate.backup
 
 #zip files
 *.zip
+
+*.swp
