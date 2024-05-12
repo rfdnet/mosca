@@ -4,7 +4,7 @@
 resource "aws_lambda_function" "insertDB" {
   # If the file is not in the current working directory you will need to include a
   # path.module in the filename.
-  filename      = "../app/insertDB.js"
+  filename      = "../app/lambda/insertDB/lambda.zip"
   function_name = "insertDB"
   role          = "arn:aws:iam::784488449591:role/service-role/insertDB-role-f24q2iu4"
   handler       = "index.handler"
