@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Hello World</title>
+    <title>Ola Mundo!!d</title>
     <!-- Add some CSS to change client UI -->
     <style>
     body {
-        background-color: #232F3E;
+        background-color: #232F33;
         }
     label, button {
         color: #FF9900;
@@ -38,7 +39,7 @@
                 redirect: 'follow'
             };
             // make API call with parameters and use promises to get response
-            fetch("https://ghlww73b11.execute-api.us-west-2.amazonaws.com/dev", requestOptions)
+            fetch("https://b0xg2ywjng.execute-api.us-west-2.amazonaws.com/dev", requestOptions)
             .then(response => response.text())
             .then(result => alert(JSON.parse(result).body))
             .catch(error => console.log('error', error));
@@ -47,12 +48,12 @@
 </head>
 <body>
     <form>
-        <label>First Name :</label>
+        <label>Primeiro Name :</label>
         <input type="text" id="fName">
-        <label>Last Name :</label>
+        <label>ultimo Nome :</label>
         <input type="text" id="lName">
         <!-- set button onClick method to call function we defined passing input values as parameters -->
-        <button type="button" onclick="callAPI(document.getElementById('fName').value,document.getElementById('lName').value)">Insert</button>
+        <button type="button" onclick="callAPI(document.getElementById('fName').value,document.getElementById('lName').value)">Inserir no banco</button>
     </form>
 </body>
 </html>

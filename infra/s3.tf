@@ -1,4 +1,3 @@
-
 ##### static contentt #####
 resource "aws_s3_bucket" "bucket" {
   bucket        = "mosca-static-content"
@@ -16,11 +15,16 @@ resource "aws_s3_bucket_website_configuration" "webapp" {
 }
 
 resource "aws_s3_object" "object" {
+  #for_each     = fileset(path.module, "../app/static-content/**/*.{html,css,js}")
+  for_each        = fileset("../app/static-content/", "*.html")
   bucket       = aws_s3_bucket.bucket.id
-  key          = "index.html"
-  source       = "../app/index.html"
+  key          = each.value
+  #key          = "index.html"
+  #source       = "../app/static-content/index.html"
+  source          = "../app/static-content/${each.value}"
   content_type = "text/html"
-
+  etag            = filemd5("../app/static-content/${each.value}")
+  
 
 }
 
