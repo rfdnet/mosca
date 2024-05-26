@@ -1,19 +1,21 @@
+# zip file for InsertDB zip
+data "archive_file" "lambdaInsertDB" {
+  type        = "zip"
+  source_file = "${path.module}/../app/lambda/insertDB/index.js"
+  output_path = "insertDB.zip"
+}
 
-
-// Insert Lambda
+// lambdaInsertDB lambda
 resource "aws_lambda_function" "insertDB" {
-  # If the file is not in the current working directory you will need to include a
-  # path.module in the filename.
-  filename      = "../app/lambda/insertDB/lambda.zip"
+  filename      = "insertDB.zip"
   function_name = "insertDB"
   role          = "arn:aws:iam::784488449591:role/service-role/insertDB-role-f24q2iu4"
   handler       = "index.handler"
-
-  #//source_code_hash = base64sha256(file("../app/lambda1.js"))
-  source_code_hash = "cXs/p83uKVGC3g8hZBwNylQag7lUAKaN+fgkdlBxHMA="
+  source_code_hash = data.archive_file.lambdaInsertDB.output_base64sha256
   runtime          = "nodejs16.x"
   ephemeral_storage {
     size = 512
+  
   }
   architectures = ["x86_64"]
 
@@ -24,50 +26,42 @@ resource "aws_lambda_function" "insertDB" {
   }
 
   memory_size = 128
-
   package_type = "Zip"
-
-
-
   tags = {
     Env          = "dev"
     "Managed by" = "Terraform"
   }
-
 
 }
 
+// zip file for helloworld lambda
+data "archive_file" "helloworld" {
+  type        = "zip"
+  source_file = "${path.module}/../app/lambda/helloworld/index.js"
+  output_path = "helloworld.zip"
+}
 
+// helloworld lambda
 resource "aws_lambda_function" "helloworld" {
-   # If the file is not in the current working directory you will need to include a
-  # path.module in the filename.
-  filename      = "../app/lambda/helloworld/lambda.zip"
-  function_name = "helloworld"
-  role          = "arn:aws:iam::784488449591:role/service-role/insertDB-role-f24q2iu4"
-  handler       = "index.handler"
-
-  #//source_code_hash = base64sha256(file("../app/lambda1.js"))
-  source_code_hash = "IcPjz2vXr6Fw1R1xdtvqTPm8cdZN99ZEZYg8xn7B5FI="
-  runtime          = "nodejs16.x"
-  ephemeral_storage {
-    size = 512
-  }
-  architectures = ["x86_64"]
-
-  logging_config {
-    log_format       = "JSON"
-    log_group        = "/aws/lambda/helloworld"
-    system_log_level = "DEBUG"
-  }
-
-  memory_size = 128
-
-  package_type = "Zip"
-
-
-
-  tags = {
-    Env          = "dev"
-    "Managed by" = "Terraform"
-  }
+ filename      = "helloworld.zip"
+ function_name = "helloworld"
+ role          = "arn:aws:iam::784488449591:role/service-role/insertDB-role-f24q2iu4"
+ handler       = "index.handler"
+ source_code_hash = data.archive_file.helloworld.output_base64sha256 
+ runtime          = "nodejs16.x"
+ ephemeral_storage {
+   size = 512
+ }
+ architectures = ["x86_64"]
+ logging_config {
+   log_format       = "JSON"
+   log_group        = "/aws/lambda/helloworld"
+   system_log_level = "DEBUG"
+ }
+ memory_size = 128
+ package_type = "Zip"
+ tags = {
+   Env          = "dev"
+   "Managed by" = "Terraform"
+ }
 }
