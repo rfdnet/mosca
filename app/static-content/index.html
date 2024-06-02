@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Ola patetas !!</title>
+    <!-- Add some CSS to change client UI -->
+    <style>
+    body {
+        background-color: #232F33;
+        }
+    label, button {
+        color: #FF9900;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 20px;
+        margin-left: 40px;
+        }
+     input {
+        color: #232F3E;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 20px;
+        margin-left: 20px;
+        }
+    </style>
+    <script>
+        // define the callAPI function that takes a first name and last name as parameters
+        var callAPI = (firstName,lastName)=>{
+            // instantiate a headers object
+            var myHeaders = new Headers();
+            // add content type header to object
+            myHeaders.append("Content-Type", "application/json");
+            // using built in JSON utility package turn object to string and store in a variable
+            var raw = JSON.stringify({"firstName":firstName,"lastName":lastName});
+            // create a JSON object with parameters for API call and store in a variable
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            };
+            // make API call with parameters and use promises to get response
+            fetch("https://b0xg2ywjng.execute-api.us-west-2.amazonaws.com/dev", requestOptions)
+            .then(response => response.text())
+            .then(result => alert(JSON.parse(result).body))
+            .catch(error => console.log('error', error));
+        }
+    </script>
+
+    <script>
+        // define the callAPI function that takes a first name and last name as parameters
+        var callBuscarPateta = (firstName,lastName)=>{
+            // instantiate a headers object
+            var myHeaders = new Headers();
+            // add content type header to object
+            myHeaders.append("Content-Type", "application/json");
+            // using built in JSON utility package turn object to string and store in a variable
+            var raw = JSON.stringify({"firstName":firstName,"lastName":lastName});
+            // create a JSON object with parameters for API call and store in a variable
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            };
+            // make API call with parameters and use promises to get response
+            fetch("https://fmg6smlwc6.execute-api.us-west-2.amazonaws.com/dev", requestOptions)
+            .then(response => alert(response.text()))
+            .then(result => alert(JSON.parse(result).body))
+            .catch(error => console.log('error', error));
+        }
+    </script>
+
+
+
+
+</head>
+<body>
+    <form>
+        <label>Primeiro Name :</label>
+        <input type="text" id="fName">
+        <label>ultimo Nome :</label>
+        <input type="text" id="lName">
+        <!-- set button onClick method to call function we defined passing input values as parameters -->
+        <button type="button" onclick="callAPI(document.getElementById('fName').value,document.getElementById('lName').value)">Inserir o pateta no banco</button>
+
+        <button type="button" onclick="callBuscarPateta(document.getElementById('fName').value,document.getElementById('lName').value)">Buscar algum(s) pateta(s)</button>
+
+        <button type ="button" onclick="alert('Hello\nHow are you?')">teste1</button>
+        <button type ="button" onclick="callBuscarPateta()">teste123456</button>
+
+
+
+
+    </form>
+</body>
+</html>
